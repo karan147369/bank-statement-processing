@@ -8,6 +8,7 @@ const app = express();
 const multer = require("multer"); 
 const PORT = process.env.PORT || 3000;
 const parsePdf = require('./parsePdf');
+const savetocsv = require("./saveToCsv");
 
 // ---- Middlewares ---- //
 const upload = multer({ dest: "uploads/" }); 
@@ -39,6 +40,9 @@ app.post("/parse-pdf",auth, upload.single("file"), async (req, res) => {
     res.status(500).send({ error: "Failed to parse PDF", details: err.message });
   }
 });
+app.get("/view-report",auth,(req,res,next)=>{
+
+})
 app.post("/echo",auth, (req, res) => {
   res.json({
     receivedBody: req.body,
