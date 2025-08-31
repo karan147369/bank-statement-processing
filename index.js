@@ -33,7 +33,6 @@ app.post("/parse-pdf",auth, upload.single("file"), async (req, res) => {
     if (!req.file) {
       return res.status(400).send({ error: "No file uploaded" });
     }
-    console.log(req.file)
     const data = await parsePdf(req.file.path);
     res.status(200).json({data});
   } catch (err) {
