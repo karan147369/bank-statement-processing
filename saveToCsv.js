@@ -4,8 +4,10 @@ const csvWriter = createCsvWriter({
   header: [
     { id: "amount", title: "Amount" },
     { id: "transaction", title: "transaction" },
+    { id: "date", title: "date"},
     { id: "source", title:'source'}
-  ]
+  ],
+  append: true,
 });
 const savetocsv = async(records)=>{
     try{

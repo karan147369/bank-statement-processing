@@ -8,8 +8,7 @@ const app = express();
 const multer = require("multer"); 
 const PORT = process.env.PORT || 3000;
 const parsePdf = require('./parsePdf');
-const savetocsv = require("./saveToCsv");
-
+const mongoose = require('mongoose');
 // ---- Middlewares ---- //
 const upload = multer({ dest: "uploads/" }); 
 // Enable CORS
@@ -23,7 +22,9 @@ app.use(express.urlencoded({ extended: true }));
 
 // Logger (development friendly)
 app.use(morgan("dev"));
+(async function(){ await mongoose.connect(process.env.URL || ""); })()
 
+console.log("connected to Db");
 // ---- Routes ---- //
 app.get("/", auth, (req, res) => {
   res.json({ message: "Welcome to Express API 🚀" });
